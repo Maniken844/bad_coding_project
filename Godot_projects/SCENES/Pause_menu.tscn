@@ -1,0 +1,147 @@
+[gd_scene load_steps=9 format=3 uid="uid://dynevgxa7gk21"]
+
+[ext_resource type="Shader" path="res://RESOURCES/SHADERS/Blur.gdshader" id="1_gvhmy"]
+[ext_resource type="FontFile" uid="uid://7tmthy3fpx38" path="res://RESOURCES/FONTS/RobotoSlab-VariableFont_wght.ttf" id="2_g4bwj"]
+[ext_resource type="Script" path="res://SCRIPTS/Pause_menu.gd" id="2_id3hm"]
+[ext_resource type="FontFile" uid="uid://ddt6373sdi3xc" path="res://RESOURCES/FONTS/new_font_file.tres" id="4_aphg4"]
+[ext_resource type="PackedScene" uid="uid://270unlvrl8h2" path="res://SCENES/Pause_Settings.tscn" id="5_udtc1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bf7a3"]
+shader = ExtResource("1_gvhmy")
+shader_parameter/blur = 0.531
+shader_parameter/brightness = 0.8
+
+[sub_resource type="InputEventKey" id="InputEventKey_8norg"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_e3uwf"]
+events = [SubResource("InputEventKey_8norg")]
+
+[node name="Pause_menus" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_id3hm")
+
+[node name="PauseMenu" type="ColorRect" parent="."]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_bf7a3")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu/CenterContainer"]
+custom_minimum_size = Vector2(455, 150)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PauseMenu/CenterContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Restart" type="Button" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(0, 0, 1, 1)
+theme_override_font_sizes/font_size = 47
+text = " ↻ "
+flat = true
+
+[node name="VSeparator4" type="VSeparator" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_g4bwj")
+theme_override_font_sizes/font_size = 36
+text = "   p a u s e d  "
+horizontal_alignment = 1
+uppercase = true
+
+[node name="VSeparator" type="VSeparator" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="Resume_Button" type="Button" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(0, 0.752941, 0.321569, 1)
+theme_override_fonts/font = ExtResource("4_aphg4")
+theme_override_font_sizes/font_size = 20
+shortcut = SubResource("Shortcut_e3uwf")
+shortcut_feedback = false
+shortcut_in_tooltip = false
+text = "Resume"
+flat = true
+
+[node name="VSeparator2" type="VSeparator" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="Settings_Button" type="Button" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.560784, 0.580392, 0.592157, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_aphg4")
+theme_override_font_sizes/font_size = 20
+text = "Settings"
+flat = true
+
+[node name="VSeparator3" type="VSeparator" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="Exit_to_Menu_Button" type="Button" parent="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_aphg4")
+theme_override_font_sizes/font_size = 20
+text = "    Exit    "
+flat = true
+
+[node name="ColorRect" parent="." instance=ExtResource("5_udtc1")]
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer/Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer/Resume_Button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer/Settings_Button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="PauseMenu/CenterContainer/PanelContainer/MarginContainer/HBoxContainer/Exit_to_Menu_Button" to="." method="_on_exit_to_menu_button_pressed"]

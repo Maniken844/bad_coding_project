@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://bvuojva8p761y"]
+
+[ext_resource type="Script" path="res://SCRIPTS/Player(WIP).gd" id="1_emcw3"]
+[ext_resource type="PackedScene" uid="uid://dynevgxa7gk21" path="res://SCENES/Pause_menu.tscn" id="2_u1cxb"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bqka0"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_opklg"]
+
+[node name="Player" type="CharacterBody3D"]
+transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, 0, 0.14937, 0)
+script = ExtResource("1_emcw3")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_bqka0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_opklg")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43965, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_u1cxb")]
+
+[node name="HeadBonker" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.275593, 0)
+target_position = Vector3(0, 1, 0)
