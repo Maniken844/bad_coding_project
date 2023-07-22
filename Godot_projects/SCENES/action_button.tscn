@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://k3pm4swou1bp"]
+
+[ext_resource type="FontFile" uid="uid://ddt6373sdi3xc" path="res://RESOURCES/FONTS/new_font_file.tres" id="1_p5pbx"]
+[ext_resource type="Script" path="res://SCRIPTS/action_button.gd" id="2_srucg"]
+
+[node name="Action_button" type="Button"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(30, 30)
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_fonts/font = ExtResource("1_p5pbx")
+theme_override_font_sizes/font_size = 24
+flat = true
+script = ExtResource("2_srucg")
+
+[connection signal="toggled" from="." to="." method="_on_toggled"]

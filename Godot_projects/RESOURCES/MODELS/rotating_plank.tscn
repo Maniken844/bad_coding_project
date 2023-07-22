@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c4th3uwrl8it3"]
+[gd_scene load_steps=16 format=3 uid="uid://c4th3uwrl8it3"]
 
 [ext_resource type="Script" path="res://SCRIPTS/Rotating_plank_move_player.gd" id="2_l6ysn"]
 
@@ -225,6 +225,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_drd4s")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ilinc"]
+height = 8.45743
+radius = 1.29054
+
 [sub_resource type="Animation" id="Animation_ig8cb"]
 length = 0.001
 
@@ -276,21 +280,30 @@ use_collision = true
 size = Vector3(3.01102, 1, 3.08649)
 
 [node name="Cylinder_002" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, -4.46638e-06, -4.46638e-06, -3.74321e-06, -1, -1.61683e-11, 1.03404, -3.61999e-06, 0, 2.67, 0)
+transform = Transform3D(-0.420256, 0, -0.907405, -0.907405, -3.74321e-06, 0.420256, -3.2848e-06, 1.03404, 1.52132e-06, 0, 2.67, 0)
 rotation_order = 0
 mesh = SubResource("ArrayMesh_yqg21")
 skeleton = NodePath("")
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="Cylinder_002"]
-transform = Transform3D(1, 0, -4.46638e-06, 0, 1, 0, 4.46638e-06, 0, 1, 0, 0, 0)
+transform = Transform3D(0.846052, -4.54747e-13, 0.533101, -5.68434e-14, 1, 0, -0.533101, -2.27374e-13, 0.846052, -2.38419e-07, -0.093939, 0)
 transparency = 1.0
 use_collision = true
 radius = 1.32837
-height = 8.68366
+height = 8.82473
 script = ExtResource("2_l6ysn")
+
+[node name="Area3D" type="Area3D" parent="Cylinder_002"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Cylinder_002/Area3D"]
+transform = Transform3D(0.999999, 1.36424e-12, 2.98044e-08, 3.63798e-12, 0.999998, 2.84217e-13, -2.98002e-08, 5.68434e-14, 0.999999, 2.38419e-07, -0.0688635, 8.9407e-08)
+shape = SubResource("CylinderShape3D_ilinc")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "rotating"
 libraries = {
 "": SubResource("AnimationLibrary_yg3ex")
 }
+
+[connection signal="body_entered" from="Cylinder_002/Area3D" to="Cylinder_002/CSGCylinder3D" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Cylinder_002/Area3D" to="Cylinder_002/CSGCylinder3D" method="_on_area_3d_body_exited"]

@@ -4,7 +4,7 @@ var speed
 const WALK_SPEED = 5.5
 const SPRINT_SPEED = 10.0
 const CROUCH_SPEED = 3.5
-const JUMP_VELOCITY = 4.5
+const JUMP_VELOCITY = 5.5
 const SENSITIVITY = 1.0
 
 #How fast Character changes from standing to crouching
@@ -21,8 +21,8 @@ var t_bob = 0.0
 #checks
 var is_crouching = false
 var can_sprint = true
-#Gravity
-var gravity = 9.8
+#Gravity 9.8
+var gravity = 13
 
 #for later sensitivity setting in settings menu
 var Sens_multiplier = 100.0
@@ -31,10 +31,13 @@ var Sens_multiplier = 100.0
 @onready var Camera = $Head/Camera3D
 @onready var Player_Collider = $CollisionShape3D
 @onready var head_bonker = $HeadBonker
+@onready var crosshair = $Head/Camera3D/Control
 
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if GlobalVariables.Crosshair_Is_On == true:
+		crosshair.show()
 
 
 
@@ -46,7 +49,7 @@ func _unhandled_input(event):
 	if event.is_action_pressed("Escape"):
 		$PauseMenu.pause()
 func _physics_process(delta):
-	
+	GlobalVariables.is_crouching = is_crouching
 	#no obstacles above head check
 	var head_bonked = false
 	if head_bonker.is_colliding():
@@ -91,9 +94,6 @@ func _physics_process(delta):
 	t_bob += delta * velocity.length() * float(is_on_floor())
 	Camera.transform.origin = _headShake(t_bob)
 
-	if Input.is_action_pressed("Crouch"):
-		pass #crouching here
-	
 	var input_dir = Input.get_vector("Left", "Right", "Up", "Down")
 	var direction = (Head.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if is_on_floor():
