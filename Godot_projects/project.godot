@@ -20,6 +20,10 @@ boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://RESOURCES/ICONS/icon.svg"
 
+[autoload]
+
+GlobalVariables="*res://SCRIPTS/global_variables.gd"
+
 [display]
 
 window/size/viewport_width=1366

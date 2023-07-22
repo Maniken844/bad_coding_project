@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://cq36xf83oiai1"]
+[gd_scene load_steps=5 format=3 uid="uid://cq36xf83oiai1"]
 
 [ext_resource type="Script" path="res://SCRIPTS/Settings_menu.gd" id="1_26a2g"]
 [ext_resource type="FontFile" uid="uid://ddt6373sdi3xc" path="res://RESOURCES/FONTS/new_font_file.tres" id="2_te2nh"]
+[ext_resource type="PackedScene" uid="uid://k3pm4swou1bp" path="res://SCENES/action_button.tscn" id="3_hej04"]
+[ext_resource type="PackedScene" uid="uid://4jek5q3uyox2" path="res://SCENES/Crosshair.tscn" id="4_onwsc"]
 
 [node name="Settings_Menu" type="Control"]
 layout_mode = 3
@@ -56,7 +58,7 @@ grow_vertical = 2
 size_flags_horizontal = 0
 mouse_filter = 0
 mouse_force_pass_scroll_events = false
-theme_override_constants/separation = 10
+theme_override_constants/separation = 0
 
 [node name="Display" type="Button" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options"]
 texture_filter = 1
@@ -120,6 +122,21 @@ flat = true
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
+[node name="Gameplay" type="Button" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options"]
+texture_filter = 1
+texture_repeat = 1
+custom_minimum_size = Vector2(100, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Gameplay"
+flat = true
+
+[node name="HSeparator5" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
 [node name="Other" type="Button" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options"]
 texture_filter = 1
 texture_repeat = 1
@@ -131,7 +148,7 @@ theme_override_font_sizes/font_size = 24
 text = "Other"
 flat = true
 
-[node name="HSeparator5" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options"]
+[node name="HSeparator6" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options"]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
@@ -165,6 +182,7 @@ text = "Back
 flat = true
 
 [node name="Display_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -173,6 +191,7 @@ size_flags_horizontal = 8
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
+tooltip_text = "Display mode"
 theme_override_fonts/font = ExtResource("2_te2nh")
 theme_override_font_sizes/font_size = 24
 flat = true
@@ -188,24 +207,12 @@ popup/item_1/id = 3
 popup/item_2/text = "Borderless"
 popup/item_2/id = 4
 
-[node name="Fullscreen_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container"]
-visible = false
-texture_filter = 1
-texture_repeat = 1
-layout_mode = 2
-size_flags_horizontal = 8
-theme_override_fonts/font = ExtResource("2_te2nh")
-theme_override_font_sizes/font_size = 24
-text = "Fullscreen Mode"
-flat = true
-alignment = 1
-icon_alignment = 1
-
 [node name="Vsync_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Vertical Synchronization - limiting fps to your monitor Hz Rate"
 theme_override_fonts/font = ExtResource("2_te2nh")
 theme_override_font_sizes/font_size = 24
 text = "Vsync"
@@ -225,6 +232,226 @@ theme_override_fonts/font = ExtResource("2_te2nh")
 theme_override_font_sizes/font_size = 24
 text = "It's controls"
 horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container"]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Forward" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Forward"
+horizontal_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Backward" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Backward"
+horizontal_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Left" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Left"
+horizontal_alignment = 1
+
+[node name="HSeparator4" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Right" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Right"
+horizontal_alignment = 1
+
+[node name="HSeparator5" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Sprint" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Sprint"
+horizontal_alignment = 1
+
+[node name="HSeparator6" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Crouch" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Crouch"
+horizontal_alignment = 1
+
+[node name="HSeparator7" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Jump" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Jump"
+horizontal_alignment = 1
+
+[node name="HSeparator8" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Restart" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Restart"
+horizontal_alignment = 1
+
+[node name="HSeparator9" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Quit" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Quit"
+horizontal_alignment = 1
+
+[node name="HSeparator10" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VSeparator2" type="VSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 7
+
+[node name="HSeparator" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Up"
+
+[node name="HSeparator2" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button2" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Down"
+
+[node name="HSeparator3" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button3" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Left"
+
+[node name="HSeparator4" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button4" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Right"
+
+[node name="HSeparator5" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button5" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Sprint"
+
+[node name="HSeparator6" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button6" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Crouch"
+
+[node name="HSeparator7" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button7" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Jump"
+
+[node name="HSeparator8" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button8" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Restart"
+
+[node name="HSeparator9" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Action_button9" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2" instance=ExtResource("3_hej04")]
+layout_mode = 2
+flat = false
+clip_text = true
+action = "Quit"
+
+[node name="HSeparator10" type="HSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="VSeparator3" type="VSeparator" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Controls_Container/HBoxContainer"]
+layout_mode = 2
 
 [node name="Graphics_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
 visible = false
@@ -249,7 +476,7 @@ size_flags_horizontal = 8
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_te2nh")
 theme_override_font_sizes/font_size = 24
-text = "It's Audio settings"
+text = "It's Audio "
 horizontal_alignment = 1
 
 [node name="Other_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
@@ -265,12 +492,114 @@ theme_override_font_sizes/font_size = 24
 text = "It's other settings"
 horizontal_alignment = 1
 
+[node name="Gameplay_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
+visible = false
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="gameplay_test_label" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "It's Gameplay
+"
+horizontal_alignment = 1
+
+[node name="FoV" type="HSlider" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+tooltip_text = "Field Of View (FOV) : 75"
+min_value = 60.0
+max_value = 140.0
+step = 5.0
+value = 75.0
+tick_count = 1
+ticks_on_borders = true
+
+[node name="Dynamic_FOV_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+tooltip_text = "When enabled, Field Of View will be changing when you walking, sprinting, etc."
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Dynamic FOV"
+flat = true
+icon_alignment = 1
+
+[node name="Crosshair_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+tooltip_text = "When enabled, Field Of View will be changing when you walking, sprinting, etc."
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Crosshair"
+flat = true
+icon_alignment = 1
+
+[node name="Crosshair_Panel" type="Control" parent="ColorRect/CenterContainer/PanelContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel"]
+layout_mode = 1
+offset_right = 100.0
+offset_bottom = 104.0
+
+[node name="PanelContainer" type="PanelContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Control" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/PanelContainer" instance=ExtResource("4_onwsc")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="cross_settings" type="PanelContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings"]
+layout_mode = 2
+
+[node name="cross_color_sat" type="HSlider" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+tooltip_text = "Color SATURATION"
+min_value = 1.0
+value = 1.0
+tick_count = 1
+ticks_on_borders = true
+
+[node name="cross_color_hue" type="HSlider" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings/VBoxContainer"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+tooltip_text = "Color HUE"
+min_value = 1.0
+max_value = 359.0
+value = 1.0
+tick_count = 1
+ticks_on_borders = true
+
 [connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Display" to="." method="_on_display_focus_entered"]
 [connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Controls" to="." method="_on_controls_focus_entered"]
 [connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Graphics" to="." method="_on_graphics_focus_entered"]
 [connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Audio" to="." method="_on_audio_focus_entered"]
+[connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Gameplay" to="." method="_on_gameplay_focus_entered"]
 [connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Other" to="." method="_on_other_focus_entered"]
 [connection signal="pressed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Apply_and_back/Back_Button" to="." method="_on_back_button_pressed"]
 [connection signal="item_selected" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/DisplayMode" to="." method="_on_display_mode_item_selected"]
-[connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/Fullscreen_toggle" to="." method="_on_fullscreen_toggle_toggled"]
 [connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/Vsync_toggle" to="." method="_on_vsync_toggle_toggled"]
+[connection signal="changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_changed"]
+[connection signal="drag_ended" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_drag_ended"]
+[connection signal="value_changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_value_changed"]
+[connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Dynamic_FOV_toggle" to="." method="_on_dynamic_fov_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Crosshair_toggle" to="." method="_on_crosshair_toggle_toggled"]
