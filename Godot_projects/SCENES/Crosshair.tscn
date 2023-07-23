@@ -1,6 +1,8 @@
-[gd_scene format=3 uid="uid://4jek5q3uyox2"]
+[gd_scene load_steps=2 format=3 uid="uid://4jek5q3uyox2"]
 
-[node name="Control" type="Control"]
+[ext_resource type="Script" path="res://SCENES/cross_control.gd" id="1_5rlbf"]
+
+[node name="Crosshair_control" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,23 +20,24 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_5rlbf")
 
 [node name="Line2D" type="Line2D" parent="cross_control"]
-texture_filter = 1
+texture_filter = 2
 texture_repeat = 1
 position = Vector2(0, 1)
 points = PackedVector2Array(-30, -10, -15, 0, -30, 10)
 width = 4.99
 
 [node name="Line2D3" type="Line2D" parent="cross_control"]
-texture_filter = 1
+texture_filter = 2
 texture_repeat = 1
 position = Vector2(0, 1)
 points = PackedVector2Array(0, 2, 0, -2, 0, 0, 2, 0, -2, 0)
 width = 4.99
 
 [node name="Line2D2" type="Line2D" parent="cross_control"]
-texture_filter = 1
+texture_filter = 2
 texture_repeat = 1
 position = Vector2(0, 1)
 points = PackedVector2Array(30, -10, 15, 0, 30, 10)

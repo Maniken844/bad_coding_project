@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://bvuojva8p761y"]
+[gd_scene load_steps=8 format=3 uid="uid://bvuojva8p761y"]
 
 [ext_resource type="Script" path="res://SCRIPTS/Player(WIP).gd" id="1_emcw3"]
 [ext_resource type="Script" path="res://SCRIPTS/Player_Camera.gd" id="2_n1tnn"]
 [ext_resource type="PackedScene" uid="uid://dynevgxa7gk21" path="res://SCENES/Pause_menu.tscn" id="2_u1cxb"]
 [ext_resource type="PackedScene" uid="uid://4jek5q3uyox2" path="res://SCENES/Crosshair.tscn" id="3_pu1u6"]
+[ext_resource type="PackedScene" uid="uid://bum3frtbxymi" path="res://SCENES/fps_counter.tscn" id="4_w2t7h"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bqka0"]
 
@@ -25,8 +26,28 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.43965, 0)
 [node name="Camera3D" type="Camera3D" parent="Head"]
 script = ExtResource("2_n1tnn")
 
-[node name="Control" parent="Head/Camera3D" instance=ExtResource("3_pu1u6")]
+[node name="HUD" type="Control" parent="Head/Camera3D"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Crosshair_control" parent="Head/Camera3D/HUD" instance=ExtResource("3_pu1u6")]
 visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[node name="FPS_COUNTER" parent="Head/Camera3D/HUD" instance=ExtResource("4_w2t7h")]
+visible = false
+layout_mode = 1
+mouse_filter = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_u1cxb")]
 

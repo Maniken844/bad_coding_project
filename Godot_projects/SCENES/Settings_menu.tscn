@@ -202,9 +202,9 @@ selected = 0
 allow_reselect = true
 popup/item_0/text = "Windowed"
 popup/item_0/id = 0
-popup/item_1/text = "Fullscreen"
+popup/item_1/text = "Borderless"
 popup/item_1/id = 3
-popup/item_2/text = "Borderless"
+popup/item_2/text = "Fullscreen"
 popup/item_2/id = 4
 
 [node name="Vsync_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container"]
@@ -466,6 +466,40 @@ theme_override_font_sizes/font_size = 24
 text = "It's graphics"
 horizontal_alignment = 1
 
+[node name="Shadows_label" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 20
+text = "Shadows (wip)
+"
+vertical_alignment = 1
+
+[node name="Shadows_mode" type="OptionButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 20
+disabled = true
+flat = true
+alignment = 1
+clip_text = true
+item_count = 7
+selected = 2
+popup/item_0/text = "Off"
+popup/item_0/id = 0
+popup/item_1/text = "Very low"
+popup/item_1/id = 1
+popup/item_2/text = "Low"
+popup/item_2/id = 2
+popup/item_3/text = "Medium"
+popup/item_3/id = 3
+popup/item_4/text = "High"
+popup/item_4/id = 4
+popup/item_5/text = "Ultra"
+popup/item_5/id = 5
+popup/item_6/text = "Max (Not recommended)"
+popup/item_6/id = 6
+
 [node name="Audio_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
 visible = false
 custom_minimum_size = Vector2(250, 0)
@@ -492,25 +526,35 @@ theme_override_font_sizes/font_size = 24
 text = "It's other settings"
 horizontal_alignment = 1
 
+[node name="FPS_Counter_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Other_Container"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "FPS Display"
+flat = true
+alignment = 1
+
 [node name="Gameplay_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
 visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="gameplay_test_label" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
+[node name="FoV_value_label" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_te2nh")
 theme_override_font_sizes/font_size = 24
-text = "It's Gameplay
-"
-horizontal_alignment = 1
+text = "75"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="FoV" type="HSlider" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
 texture_filter = 1
 texture_repeat = 1
 layout_mode = 2
-tooltip_text = "Field Of View (FOV) : 75"
+tooltip_text = "Field Of View (FOV) "
 min_value = 60.0
 max_value = 140.0
 step = 5.0
@@ -540,6 +584,17 @@ text = "Crosshair"
 flat = true
 icon_alignment = 1
 
+[node name="Camera_tilt_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+tooltip_text = "When enabled, Field Of View will be changing when you walking, sprinting, etc."
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Camera tilt"
+flat = true
+icon_alignment = 1
+
 [node name="Crosshair_Panel" type="Control" parent="ColorRect/CenterContainer/PanelContainer"]
 visible = false
 layout_mode = 2
@@ -547,47 +602,31 @@ size_flags_horizontal = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel"]
 layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
 offset_right = 100.0
-offset_bottom = 104.0
+grow_vertical = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="Control" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/PanelContainer" instance=ExtResource("4_onwsc")]
+[node name="Crosshair_control" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/PanelContainer" instance=ExtResource("4_onwsc")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="cross_settings" type="PanelContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer"]
 layout_mode = 2
-size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings"]
+[node name="cross_color_picker" type="ColorPickerButton" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings"]
+custom_minimum_size = Vector2(0, 41.435)
 layout_mode = 2
-
-[node name="cross_color_sat" type="HSlider" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings/VBoxContainer"]
-texture_filter = 1
-texture_repeat = 1
-layout_mode = 2
-tooltip_text = "Color SATURATION"
-min_value = 1.0
-value = 1.0
-tick_count = 1
-ticks_on_borders = true
-
-[node name="cross_color_hue" type="HSlider" parent="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings/VBoxContainer"]
-texture_filter = 1
-texture_repeat = 1
-layout_mode = 2
-tooltip_text = "Color HUE"
-min_value = 1.0
-max_value = 359.0
-value = 1.0
-tick_count = 1
-ticks_on_borders = true
+tooltip_text = "Set color for Crosshair"
+color = Color(0.654902, 0.25098, 0.458824, 1)
+edit_alpha = false
 
 [connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Display" to="." method="_on_display_focus_entered"]
 [connection signal="focus_entered" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Tree/List_of_options/Controls" to="." method="_on_controls_focus_entered"]
@@ -598,8 +637,13 @@ ticks_on_borders = true
 [connection signal="pressed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Apply_and_back/Back_Button" to="." method="_on_back_button_pressed"]
 [connection signal="item_selected" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/DisplayMode" to="." method="_on_display_mode_item_selected"]
 [connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/Vsync_toggle" to="." method="_on_vsync_toggle_toggled"]
+[connection signal="item_selected" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container/Shadows_mode" to="." method="_on_shadows_mode_item_selected"]
+[connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Other_Container/FPS_Counter_toggle" to="." method="_on_fps_counter_toggle_toggled"]
+[connection signal="visibility_changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container" to="." method="_on_gameplay_container_visibility_changed"]
 [connection signal="changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_changed"]
 [connection signal="drag_ended" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_drag_ended"]
 [connection signal="value_changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_value_changed"]
 [connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Dynamic_FOV_toggle" to="." method="_on_dynamic_fov_toggle_toggled"]
 [connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Crosshair_toggle" to="." method="_on_crosshair_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Camera_tilt_toggle" to="." method="_on_camera_tilt_toggle_toggled"]
+[connection signal="color_changed" from="ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings/cross_color_picker" to="." method="_on_cross_color_picker_color_changed"]

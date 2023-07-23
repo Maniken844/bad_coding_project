@@ -31,14 +31,18 @@ var Sens_multiplier = 100.0
 @onready var Camera = $Head/Camera3D
 @onready var Player_Collider = $CollisionShape3D
 @onready var head_bonker = $HeadBonker
-@onready var crosshair = $Head/Camera3D/Control
+@onready var crosshair = $Head/Camera3D/HUD/Crosshair_control
+@onready var fps_counter = $Head/Camera3D/HUD/FPS_COUNTER
+
 
 
 func _ready():
+	#RenderingServer.directional_soft_shadow_filter_set_quality(GlobalVariables.shadows_mode_id)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	if GlobalVariables.Crosshair_Is_On == true:
 		crosshair.show()
-
+	if GlobalVariables.FPS_Counter_Is_On == true:
+		fps_counter.show()
 
 
 func _unhandled_input(event):
@@ -49,6 +53,13 @@ func _unhandled_input(event):
 	if event.is_action_pressed("Escape"):
 		$PauseMenu.pause()
 func _physics_process(delta):
+	#DEBUG
+	
+	#print(GlobalVariables.shadows_mode_id)
+	
+	
+	
+	#DEBUG
 	GlobalVariables.is_crouching = is_crouching
 	#no obstacles above head check
 	var head_bonked = false

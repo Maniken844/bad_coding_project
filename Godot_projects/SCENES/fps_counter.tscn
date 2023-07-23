@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://bum3frtbxymi"]
+
+[ext_resource type="Script" path="res://SCENES/fps_counter.gd" id="1_ss3vi"]
+[ext_resource type="FontFile" uid="uid://ddt6373sdi3xc" path="res://RESOURCES/FONTS/new_font_file.tres" id="1_t3lcg"]
+
+[node name="FPS_COUNTER" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ss3vi")
+
+[node name="Counter" type="Label" parent="."]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+offset_right = 61.0
+offset_bottom = 36.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("1_t3lcg")
+theme_override_font_sizes/font_size = 24
+text = " FPS: "
