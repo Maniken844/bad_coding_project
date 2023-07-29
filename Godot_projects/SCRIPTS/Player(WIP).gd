@@ -22,7 +22,7 @@ var t_bob = 0.0
 var is_crouching = false
 var can_sprint = true
 #Gravity 9.8
-var gravity = 13
+var player_gravity = GlobalVariables.player_gravity
 
 #for later sensitivity setting in settings menu
 var Sens_multiplier = 100.0
@@ -68,7 +68,7 @@ func _physics_process(delta):
 	
 	#Adding the gravity.
 	if not is_on_floor():
-		velocity.y -= gravity * delta
+		velocity.y -= player_gravity * delta
 
 	#Jump.
 	if Input.is_action_just_pressed("Jump") and is_on_floor():
