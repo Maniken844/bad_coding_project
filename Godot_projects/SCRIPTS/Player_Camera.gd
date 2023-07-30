@@ -4,7 +4,6 @@ extends Camera3D
 @onready var head = $"../"
 var max_crouch_fov = GlobalVariables.camera_fov -15.0
 var based_fov = GlobalVariables.camera_fov
-var max_walk_fov = GlobalVariables.camera_fov + 20.0
 var max_sprint_fov = GlobalVariables.camera_fov + 40.0
 
 var curRotation = 0
@@ -29,9 +28,12 @@ func _process(delta):
 				if GlobalVariables.is_crouching == true:
 					fov = lerpf(fov, max_crouch_fov, 5 * delta)
 				else:
-					fov = lerpf(fov, max_walk_fov, 5 * delta)
-		elif Input.is_action_pressed("Crouch") and !Input.is_action_pressed("Sprint"):
-			fov = lerpf(fov, max_crouch_fov, 5 * delta)
+					fov = lerpf(fov, based_fov, 5 * delta)
+		elif Input.is_action_pressed("Crouch"):
+			if Input.is_action_pressed("Sprint"):
+				fov = lerpf(fov, max_crouch_fov, 5 * delta)
+			else:
+				fov = lerpf(fov, max_crouch_fov, 5 * delta)
 		else:
 			if GlobalVariables.is_crouching == true:
 				fov = lerpf(fov, max_crouch_fov, 5 * delta)
