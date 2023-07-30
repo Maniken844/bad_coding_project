@@ -8,6 +8,3 @@ func _ready():
 	csg_cylinder_3d.velocity = vel
 	#print(csg_cylinder_3d.vel)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

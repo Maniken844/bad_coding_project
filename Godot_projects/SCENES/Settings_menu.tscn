@@ -220,6 +220,25 @@ flat = true
 alignment = 1
 icon_alignment = 1
 
+[node name="FPS_value_label" type="Label" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 24
+text = "Error"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="FPS_Limit" type="HSlider" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+tooltip_text = "Note: if Vsync is on and max fps value is higher than your Monitor Hz,  he still will be limited due to your Monitor Hz"
+max_value = 360.0
+tick_count = 1
+ticks_on_borders = true
+
 [node name="Controls_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
 visible = false
 custom_minimum_size = Vector2(250, 0)
@@ -500,6 +519,30 @@ popup/item_5/id = 5
 popup/item_6/text = "Max (Not recommended)"
 popup/item_6/id = 6
 
+[node name="Fog_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Vertical Synchronization - limiting fps to your monitor Hz Rate"
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 20
+text = "Volumetric Fog"
+flat = true
+icon_alignment = 1
+
+[node name="Sdfgi_toggle" type="CheckButton" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container"]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 2
+size_flags_vertical = 0
+tooltip_text = "Signed distance field global illumination (Kinda RTX)"
+theme_override_fonts/font = ExtResource("2_te2nh")
+theme_override_font_sizes/font_size = 20
+text = "SDFGI"
+flat = true
+icon_alignment = 1
+
 [node name="Audio_Container" type="VBoxContainer" parent="ColorRect/CenterContainer/PanelContainer/MarginContainer"]
 visible = false
 custom_minimum_size = Vector2(250, 0)
@@ -637,10 +680,13 @@ edit_alpha = false
 [connection signal="pressed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Apply_and_back/Back_Button" to="." method="_on_back_button_pressed"]
 [connection signal="item_selected" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/DisplayMode" to="." method="_on_display_mode_item_selected"]
 [connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/Vsync_toggle" to="." method="_on_vsync_toggle_toggled"]
+[connection signal="drag_ended" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/FPS_Limit" to="." method="_on_fps_limit_drag_ended"]
+[connection signal="value_changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/FPS_Limit" to="." method="_on_fps_limit_value_changed"]
 [connection signal="item_selected" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container/Shadows_mode" to="." method="_on_shadows_mode_item_selected"]
+[connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container/Fog_toggle" to="." method="_on_fog_toggle_toggled"]
+[connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container/Sdfgi_toggle" to="." method="_on_sdfgi_toggle_toggled"]
 [connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Other_Container/FPS_Counter_toggle" to="." method="_on_fps_counter_toggle_toggled"]
 [connection signal="visibility_changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container" to="." method="_on_gameplay_container_visibility_changed"]
-[connection signal="changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_changed"]
 [connection signal="drag_ended" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_drag_ended"]
 [connection signal="value_changed" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV" to="." method="_on_fo_v_value_changed"]
 [connection signal="toggled" from="ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Dynamic_FOV_toggle" to="." method="_on_dynamic_fov_toggle_toggled"]

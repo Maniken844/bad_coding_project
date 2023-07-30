@@ -11,16 +11,21 @@ extends Control
 #display
 @onready var vsync_toggle = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/Vsync_toggle
 @onready var display_mode = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/DisplayMode
+@onready var fps_value_label = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/FPS_value_label
+@onready var fps_limit = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Display_Container/FPS_Limit
 #gameplay
+@onready var fo_v_value_label = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV_value_label
 @onready var fov_static = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV
 @onready var dynamic_fov_toggle = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Dynamic_FOV_toggle
 @onready var crosshair_panel = $ColorRect/CenterContainer/PanelContainer/Crosshair_Panel
 @onready var crosshair_toggle = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Crosshair_toggle
 @onready var cross_color_picker = $ColorRect/CenterContainer/PanelContainer/Crosshair_Panel/VBoxContainer/cross_settings/cross_color_picker
-@onready var fo_v_value_label = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/FoV_value_label
 @onready var camera_tilt_toggle = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Gameplay_Container/Camera_tilt_toggle
 #Graphics
 @onready var shadows_mode = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container/Shadows_mode
+@onready var fog_toggle = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container/Fog_toggle
+@onready var sdfgi_toggle = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Graphics_Container/Sdfgi_toggle
+
 #Other
 @onready var fps_counter_toggle = $ColorRect/CenterContainer/PanelContainer/MarginContainer/Other_Container/FPS_Counter_toggle
 
@@ -50,7 +55,20 @@ func _ready():
 		fps_counter_toggle.set_pressed_no_signal(true)
 	if GlobalVariables.Is_Camera_Tilt_ON == true:
 		camera_tilt_toggle.set_pressed_no_signal(true)
-
+	if GlobalVariables.Volum_Fog_Is_On:
+		fog_toggle.set_pressed_no_signal(true)
+	if !GlobalVariables.Volum_Fog_Is_On:
+		fog_toggle.set_pressed_no_signal(false)
+	if GlobalVariables.SDFGI_is_on:
+		sdfgi_toggle.set_pressed_no_signal(true)
+	if !GlobalVariables.SDFGI_is_on:
+		sdfgi_toggle.set_pressed_no_signal(false)
+	#Fps limiter
+	fps_limit.value = GlobalVariables.Max_fps
+	if fps_limit.value == 0:
+		fps_value_label.text = "Max Fps: " + "Unlimited"
+	elif fps_limit.value != 0:
+		fps_value_label.text = "Max Fps: " + str(fps_limit.value)
 
 
 		
@@ -134,7 +152,6 @@ func _on_gameplay_container_visibility_changed():
 
 #FOV & Dynamic FOV
 func _on_fo_v_value_changed(value):
-	#fov_static.tooltip_text = "Static Field Of View (FOV) value: " + str(fov_static.value)
 	fo_v_value_label.text = str(fov_static.value)
 func _on_fo_v_drag_ended(_value_changed):
 	GlobalVariables.camera_fov = fov_static.value
@@ -144,9 +161,15 @@ func _on_dynamic_fov_toggle_toggled(button_pressed):
 	elif !button_pressed:
 		GlobalVariables.Is_Dynamic_Fov_ON = false
 	
-
+func _on_fps_limit_drag_ended(_value_changed):
+	GlobalVariables.Max_fps = fps_limit.value
+	Engine.max_fps = fps_limit.value
 	
-
+func _on_fps_limit_value_changed(value):
+	if fps_limit.value == 0:
+		fps_value_label.text = "Max Fps: " + "Unlimited"
+	else:
+		fps_value_label.text = "Max Fps: " + str(fps_limit.value)
 
 
 
@@ -200,6 +223,11 @@ func _on_camera_tilt_toggle_toggled(button_pressed):
 		GlobalVariables.Is_Camera_Tilt_ON = false
 
 
+func _on_fog_toggle_toggled(button_pressed):
+	if button_pressed:
+		GlobalVariables.Volum_Fog_Is_On = true
+	else:
+		GlobalVariables.Volum_Fog_Is_On = false
 
 
 
@@ -207,3 +235,17 @@ func _on_camera_tilt_toggle_toggled(button_pressed):
 
 
 
+
+
+
+
+
+
+
+
+
+func _on_sdfgi_toggle_toggled(button_pressed):
+	if button_pressed:
+		GlobalVariables.SDFGI_is_on = true
+	else:
+		GlobalVariables.SDFGI_is_on = false
