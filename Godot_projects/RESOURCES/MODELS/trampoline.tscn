@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bf8osw1jdkiji"]
+[gd_scene load_steps=11 format=3 uid="uid://bf8osw1jdkiji"]
 
 [ext_resource type="PackedScene" uid="uid://takseyoqm50h" path="res://RESOURCES/MODELS/trampoline.glb" id="1_vvwv3"]
 [ext_resource type="Material" uid="uid://by2x34qtnsxqf" path="res://RESOURCES/TEXTURES/tram_mat.tres" id="2_0f5t7"]
 [ext_resource type="Script" path="res://SCRIPTS/trampoline.gd" id="2_bf0lq"]
+[ext_resource type="Script" path="res://SCRIPTS/tram_vel.gd" id="2_tyqtb"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_frxma"]
 _surfaces = [{
@@ -101,6 +102,7 @@ _data = {
 }
 
 [node name="trampoline" instance=ExtResource("1_vvwv3")]
+script = ExtResource("2_tyqtb")
 
 [node name="Cylinder" parent="." index="0"]
 mesh = SubResource("ArrayMesh_r0bd8")

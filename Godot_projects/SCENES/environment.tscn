@@ -114,6 +114,12 @@ size = Vector3(2.45446, 1, 2.37291)
 
 [node name="trampoline" parent="." instance=ExtResource("5_iobim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3759, 4.63434, 10.2196)
+vel = 15.0
 
 [node name="trampoline2" parent="." instance=ExtResource("5_iobim")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.38985, -0.791889, 5.30399)
+vel = 9.0
+
+[node name="trampoline3" parent="." instance=ExtResource("5_iobim")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.41313, -0.791889, 5.30399)
+vel = 30.0
